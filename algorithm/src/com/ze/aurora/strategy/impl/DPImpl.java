@@ -1,5 +1,6 @@
 package com.ze.aurora.strategy.impl;
 
+import com.ze.aurora.annotation.PoorPerformance;
 import com.ze.aurora.strategy.DP;
 
 public class DPImpl implements DP {
@@ -47,5 +48,38 @@ public class DPImpl implements DP {
             minPrice = Math.min(minPrice, prices[i]);
         }
         return profit;
+    }
+
+    @PoorPerformance(reason = "长度n的dp数组可用一个滑动窗口变量代替")
+    public int maxSubArray1(int[] nums) {
+        if (nums.length == 0) return 0;
+        if (nums.length == 1) return nums[0];
+
+        // dp[i]表示在nums[0]~nums[i]中，以nums[i]结尾的连续子数组的最大和
+        int[] dp = new int[nums.length];
+        dp[0] = nums[0];
+        int sum = nums[0];
+
+        for (int i = 1; i < nums.length; i ++) {
+            dp[i] = Math.max(dp[i-1]+nums[i], nums[i]);
+            sum = Math.max(sum, dp[i]);
+        }
+        return sum;
+    }
+
+    @Override
+    public int maxSubArray(int[] nums) {
+        if (nums.length == 0) return 0;
+        if (nums.length == 1) return nums[0];
+
+        // dp维护了nums数组中前一个元素结尾的连续子数组的最大和
+        int dp = nums[0];
+        int sum = nums[0];
+
+        for (int i = 1; i < nums.length; i ++) {
+            dp = Math.max(dp+nums[i], nums[i]);
+            sum = Math.max(sum, dp);
+        }
+        return sum;
     }
 }

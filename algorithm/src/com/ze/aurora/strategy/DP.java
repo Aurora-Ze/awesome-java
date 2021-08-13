@@ -12,4 +12,7 @@ public interface DP {
 
     @LeetCode(name = "股票的最大利润", desc = "买卖一次的最大利润")
     int maxProfit(int[] prices);
+
+    @LeetCode(name = "连续子数组的最大和", desc = "求所有连续的子数组中和的最大值")
+    int maxSubArray(int[] nums);
 }

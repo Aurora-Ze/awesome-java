@@ -1,6 +1,7 @@
 package com.ze.aurora.strategy.impl;
 
 import com.ze.aurora.annotation.LeetCode;
+import com.ze.aurora.annotation.PoorPerformance;
 import com.ze.aurora.strategy.ITree;
 import com.ze.aurora.structure.TreeNode;
 
@@ -15,8 +16,8 @@ public class TreeImpl implements ITree {
     }
 
     @Override
+    @PoorPerformance(reason = "从上到下递归时，很多节点重复判断")
     public boolean isSubStructure(TreeNode A, TreeNode B) {
-        // todo 可以优化，因为从上到下递归时，很多节点重复判断了
         if (B == null || A == null) return false;
 
         boolean match = isSubStructureSinceTop(A, B);
