@@ -15,4 +15,7 @@ public interface DP {
 
     @LeetCode(name = "连续子数组的最大和", desc = "求所有连续的子数组中和的最大值")
     int maxSubArray(int[] nums);
+
+    @LeetCode(name = "礼物的最大价值", desc = "计算从左上角拿到右下角的礼物最大总价值")
+    int maxValue(int[][] grid);
 }

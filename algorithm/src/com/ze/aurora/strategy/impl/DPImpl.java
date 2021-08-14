@@ -1,5 +1,6 @@
 package com.ze.aurora.strategy.impl;
 
+import com.ze.aurora.annotation.LeetCode;
 import com.ze.aurora.annotation.PoorPerformance;
 import com.ze.aurora.strategy.DP;
 
@@ -82,4 +83,27 @@ public class DPImpl implements DP {
         }
         return sum;
     }
+
+    @Override
+    @LeetCode(extra = "可以原地修改grid，把空间复杂度降到常数")
+    public int maxValue(int[][] grid) {
+        if (grid == null || grid.length == 0) return 0;
+        int len = grid[0].length;
+
+        // initialize the first line of the 2D-array
+        // with n+1 size to escape accessing index -1
+        int[] line = new int[len + 1];
+        for (int j = 0; j < len; j ++) {
+            line[j + 1] = grid[0][j] + line[j];
+        }
+
+        for (int i = 1; i < grid.length; i ++) {
+            for (int j = 0; j < len; j ++) {
+                // line index 1 ~ n
+                line[j + 1] = grid[i][j] + Math.max(line[j], line[j + 1]);
+            }
+        }
+        return line[len];
+    }
+
 }

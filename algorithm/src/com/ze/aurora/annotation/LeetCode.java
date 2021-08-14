@@ -2,8 +2,8 @@ package com.ze.aurora.annotation;
 
 import java.lang.annotation.*;
 
-@Target(ElementType.METHOD)         // 注解可用于方法
-@Retention(RetentionPolicy.SOURCE) //  注解只存在于源码
+@Target(ElementType.METHOD)         // annotation only used in Method
+@Retention(RetentionPolicy.SOURCE) //  only exist in source code
 public @interface LeetCode {
 
     String url() default  "direct link";
@@ -21,4 +21,9 @@ public @interface LeetCode {
      * 思路
      * */
     String idea() default "思路";
+
+    /**
+     * 补充信息
+     * */
+    String extra() default "补充信息";
 }
