@@ -2,8 +2,8 @@ package com.ze.aurora.annotation;
 
 import java.lang.annotation.*;
 
-@Target(ElementType.METHOD)         // annotation only used in Method
-@Retention(RetentionPolicy.SOURCE) //  only exist in source code
+@Target(ElementType.METHOD)        // annotation only used in Method
+@Retention(RetentionPolicy.SOURCE) // annotation only exist in source code status
 public @interface LeetCode {
 
     String url() default  "direct link";

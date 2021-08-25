@@ -2,6 +2,7 @@ package com.ze.aurora.strategy;
 
 import com.ze.aurora.annotation.LeetCode;
 
+// 动态规划相关题目
 public interface DP {
 
     @LeetCode(name = "斐波那契数列", desc = "返回该数列的第n项")
@@ -18,4 +19,10 @@ public interface DP {
 
     @LeetCode(name = "礼物的最大价值", desc = "计算从左上角拿到右下角的礼物最大总价值")
     int maxValue(int[][] grid);
+
+    @LeetCode(name = "把数字翻译成字符串", desc = "0~25分别对应a~z，求给定数字有多少种字母表示方法")
+    int translateNum(int num);
+
+    @LeetCode(name = "最长不含重复字符的子字符串", desc = "返回长度")
+    int lengthOfLongestSubstring(String s);
 }

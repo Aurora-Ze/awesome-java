@@ -4,6 +4,10 @@ import com.ze.aurora.annotation.LeetCode;
 import com.ze.aurora.annotation.PoorPerformance;
 import com.ze.aurora.strategy.DP;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 public class DPImpl implements DP {
 
     @Override
@@ -40,7 +44,7 @@ public class DPImpl implements DP {
     @Override
     public int maxProfit(int[] prices) {
         if (prices == null || prices.length < 2) return 0;
-        // 需要记录两个值：利润和股票最低价
+        // record two values, one for profit and another for min price of stock
         int minPrice = prices[0];
         int profit = 0;
 
@@ -100,10 +104,51 @@ public class DPImpl implements DP {
         for (int i = 1; i < grid.length; i ++) {
             for (int j = 0; j < len; j ++) {
                 // line index 1 ~ n
-                line[j + 1] = grid[i][j] + Math.max(line[j], line[j + 1]);
+                line[j+1] = grid[i][j] + Math.max(line[j], line[j+1]);
             }
         }
         return line[len];
+    }
+
+    @Override
+    @LeetCode(extra = "")
+    public int translateNum(int num) {
+        int x, y;
+        // initialize variables, i for zero bit, j for one bit number
+        int i = 1, j = 1, k = 0;
+
+        while (num != 0) {
+            y = num % 10;
+            num /= 10;
+            x = num % 10;
+
+            int cur = x*10 + y;
+            k = (cur >= 10 && cur <= 25) ? i+j : j;
+            // update variables for next loop
+            i = j;
+            j = k;
+        }
+        return k;
+    }
+
+    @Override
+    public int lengthOfLongestSubstring(String s) {
+        if (s == null || s.length() == 0) return 0;
+
+        int start = 0, result = 1;
+        Map<Character, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < s.length(); i ++) {
+            Character ch = s.charAt(i);
+            if (!map.containsKey(ch) || map.get(ch) < start) {
+                result = Math.max(result, i-start+1);
+            } else {
+                // set start to the next position of repeated element
+                start = map.get(ch) + 1;
+            }
+            map.put(ch, i);
+        }
+        return result;
     }
 
 }
