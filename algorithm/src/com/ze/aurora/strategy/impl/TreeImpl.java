@@ -3,7 +3,11 @@ package com.ze.aurora.strategy.impl;
 import com.ze.aurora.annotation.LeetCode;
 import com.ze.aurora.annotation.PoorPerformance;
 import com.ze.aurora.strategy.ITree;
+import com.ze.aurora.structure.Node;
 import com.ze.aurora.structure.TreeNode;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TreeImpl implements ITree {
 
@@ -49,6 +53,75 @@ public class TreeImpl implements ITree {
         if (left == null && right == null) return true;
         if (left == null || right == null) return false;
         return left.val == right.val && isSymmetric(left.left, right.right) && isSymmetric(left.right, right.left);
+    }
+
+
+    @Override
+    @LeetCode(idea = "很自然的想到dfs，但是要确定是先序中序还是后序，这样递归代码就有了相应的结构")
+    public List<List<Integer>> pathSum(TreeNode root, int target) {
+        List<Integer> list = new ArrayList<>();
+        List<List<Integer>> result = new ArrayList<>();
+        pathSum(root, target, list, result);
+
+        return result;
+    }
+
+    public void pathSum(TreeNode node, int target, List<Integer> list, List<List<Integer>> result) {
+        if (node == null) {
+            return;
+        }
+        // dfs：先序遍历
+        int newValue = target - node.val;
+        list.add(node.val);
+        if (newValue == 0 && node.left == null && node.right == null) {
+            result.add(new ArrayList<>(list)); // 拷贝一份新的！
+            list.remove(list.size()-1);
+            return;
+        }
+        pathSum(node.left, newValue, list, result);
+        pathSum(node.right, newValue, list, result);
+        // 回溯
+        list.remove(list.size()-1);
+    }
+
+
+    /** 定义全局变量**/
+    Node pre = null;
+    Node head = null;
+
+    @Override
+    public Node treeToDoublyList(Node root) {
+        if (root == null) return null;
+        inOrderRecur(root);
+        // pre最后指向尾节点
+        head.left = pre;
+        pre.right = head;
+        return head;
+    }
+
+    public void inOrderRecur(Node cur) {
+        if (cur == null) return;
+
+        inOrderRecur(cur.left);
+        if (pre == null) { // 为链表头节点
+            head = cur;
+        } else {
+            pre.right = cur;
+            cur.left = pre;
+        }
+
+        pre = cur;
+        inOrderRecur(cur.right);
+    }
+
+    public static void main(String[] args) {
+        TreeNode node = new TreeNode(1);
+        test(node);
+        System.out.println(node.val);
+    }
+
+    public static void test(TreeNode node) {
+        node = new TreeNode(2);
     }
 
 /**          先序、中序、后序遍历           **/

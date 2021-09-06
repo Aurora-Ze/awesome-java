@@ -22,10 +22,26 @@ public class StringImpl implements IString {
 
     @Override
     public String reverseWords(String s) {
-        StringBuffer buffer = new StringBuffer();
-        int left = 0;
-        int right = 0;
+        s = s.trim();
+        if (s.length() == 0) return "";
+        StringBuffer result = new StringBuffer();
 
-        return "";
+        int left = s.length() - 1;
+        while (left >= 0) {
+            while (left >= 0 && s.charAt(left) == ' ') left--;
+            int right = left;
+
+            while (left >= 0 && s.charAt(left) != ' ') left--;
+            result.append(s, left+1, right+1);
+            result.append(' ');
+        }
+        int len = result.length();
+        return result.substring(0, len-1);
+    }
+
+    public static void main(String[] args) {
+        StringImpl impl = new StringImpl();
+        String s = impl.reverseWords(" the sky is blue.");
+        System.out.printf("\"%s\"", s);
     }
 }
