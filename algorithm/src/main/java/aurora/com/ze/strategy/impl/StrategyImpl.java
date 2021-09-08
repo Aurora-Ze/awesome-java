@@ -10,12 +10,12 @@ import org.junit.jupiter.api.Test;
  */
 public class StrategyImpl implements IStrategy {
     int mode = 1000000007;
-    @Override
     public int cuttingRope(int n) {
         if (n <= 3) return n-1;
         long result = 1;
 
         int count = n / 3;
+        // 最后一个3先不要乘，避免之后除以3除不尽
         while (count > 1) {
             result = (result*3) % mode;
             count --;
