@@ -3,6 +3,7 @@ package com.ze.aurora.testcase;
 import java.lang.reflect.Field;
 
 /**
+ * 测试Java基础
  * @author Aurora
  * @date 2021/10/14 11:57
  */
@@ -24,7 +25,7 @@ public class TestBase {
 
     void testModifyString() {
         String s = "doki";
-        Field valueField = null;
+        Field valueField;
         char[] ch = null;
 
         try {
