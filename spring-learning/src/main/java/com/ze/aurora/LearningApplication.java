@@ -3,6 +3,7 @@ package com.ze.aurora;
 import com.ze.aurora.entity.Student;
 import com.ze.aurora.testcase.IOC;
 import org.junit.jupiter.api.Test;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -15,6 +16,7 @@ import java.lang.reflect.Parameter;
  * @date 2021/9/18 16:25
  */
 @SpringBootApplication
+@MapperScan("com.ze.aurora.mapper")
 public class LearningApplication {
     public static void main(String[] args) {
         SpringApplication.run(LearningApplication.class, args);

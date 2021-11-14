@@ -28,14 +28,16 @@ public class TestBase {
         char[] ch = null;
 
         try {
-            valueField = String.class.getField("value");
+            valueField = String.class.getDeclaredField("value");
+
+            // assure accessible
+            valueField.setAccessible(true);
             ch = (char[]) valueField.get(s);
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-//        valueField.setAccessible(true);
 
         ch[3] = '_';
         System.out.println(s);

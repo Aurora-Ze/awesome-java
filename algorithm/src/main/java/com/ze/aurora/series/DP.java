@@ -1,4 +1,4 @@
-package com.ze.aurora.leetcode;
+package com.ze.aurora.series;
 
 
 import com.ze.aurora.annotation.LeetCode;
@@ -33,4 +33,7 @@ public interface DP {
 
     @NowCoder(name = "最长公共子串", desc = "返回两个字符串的最长公共子串")
     String LCS(String str1, String str2);
+
+    @NowCoder(name = "最长无重复子数组")
+    int maxLength(int[] arr);
 }

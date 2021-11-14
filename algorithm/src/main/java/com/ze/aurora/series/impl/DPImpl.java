@@ -1,8 +1,8 @@
-package com.ze.aurora.leetcode.impl;
+package com.ze.aurora.series.impl;
 
 import com.ze.aurora.annotation.LeetCode;
 import com.ze.aurora.annotation.PoorPerformance;
-import com.ze.aurora.leetcode.DP;
+import com.ze.aurora.series.DP;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -210,10 +210,28 @@ public class DPImpl implements DP {
         return str1.substring(x - maxLen, x);
     }
 
+    @Override
+    public int maxLength(int[] arr) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        int start = 0;
+        int result = 0;
+        for (int i = 0; i < arr.length; i ++) {
+            if (map.containsKey(arr[i]) && map.get(arr[i]) >= start) {
+                result = Math.max(result, i - start);
+                start = i;
+            }
+            map.put(arr[i], i);
+        }
+        result = Math.max(result, arr.length - start);
+
+        return result;
+    }
+
 
     public static void main(String[] args) {
         DPImpl impl = new DPImpl();
-        String comm = impl.longestCommonSubsequence("abcde", "bda");
+        int comm = impl.maxLength(new int[]{1,2,3,3,5,2,1,9});
         System.out.println(comm);
     }
 

@@ -1,6 +1,7 @@
 package com.ze.aurora.testcase;
 
 import org.junit.jupiter.api.Test;
+import sun.misc.Unsafe;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CountDownLatch;
@@ -12,13 +13,17 @@ import java.util.concurrent.locks.ReentrantLock;
  * @date 2021/10/8 14:05
  */
 public class TestJUC {
+    static Object obj = new Object();
+    static long l = 5;
     int a;
     int b;
     volatile int c;
 
     public static void main(String[] args) {
-        TestJUC test = new TestJUC();
-        test.testVolatile();
+//        TestJUC test = new TestJUC();
+//        test.testVolatile();
+        Unsafe.getUnsafe().compareAndSwapInt(obj, l,1, 2);
+
     }
 
 
